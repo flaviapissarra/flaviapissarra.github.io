@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pt-en-logistics",
+    "pair": "PT ↔ EN",
+    "domains": ["Technical", "Logistics", "Trade Compliance"],
+    "description": "Translated port operations manuals, INCOTERMS guides, and customs documentation. Maintained terminology consistency across 40+ deliverables.",
+    "excerpt": "O desembaraço aduaneiro exige precisão terminológica e conhecimento normativo atualizado.",
+    "request_access": "https://forms.gle/your-access-form"
+  },
+  {
+    "id": "pt-fr-literary",
+    "pair": "PT ↔ FR",
+    "domains": ["Literary", "Cultural", "Publishing"],
+    "description": "Co-translated contemporary Brazilian fiction for European market release. Focused on cultural adaptation and rhythmic prose fidelity.",
+    "excerpt": "A tradução literária não transporta palavras; transporta mundos.",
+    "request_access": "https://forms.gle/your-access-form"
+  },
+  {
+    "id": "en-es-technical",
+    "pair": "EN ↔ ES",
+    "domains": ["Technical", "BI Documentation", "Trade Contracts"],
+    "description": "Localized data pipeline documentation and freight agreement templates. Ensured legal and technical accuracy across jurisdictions.",
+    "excerpt": "Documentação técnica exige clareza absoluta e padronização rigorosa.",
+    "request_access": "https://forms.gle/your-access-form"
+  }
+]
