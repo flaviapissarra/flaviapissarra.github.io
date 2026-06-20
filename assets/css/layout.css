@@ -5,7 +5,10 @@
   padding: 0;
 }
 
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth;
+  height: 100%;
+}
 
 body {
   font-family: var(--font-sans);
@@ -14,9 +17,10 @@ body {
   color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* Remove scroll global */
 }
 
 /* HEADER / STEPPER */
@@ -28,6 +32,7 @@ body {
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
   height: var(--header-height);
+  flex-shrink: 0; /* Não encolhe */
 }
 
 .header-inner {
@@ -103,18 +108,21 @@ body {
   background: var(--color-border);
 }
 
-/* MAIN */
+/* MAIN - OCUPA TODO O ESPAÇO RESTANTE */
 .site-main {
   flex: 1;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--space-8) var(--space-6); /* Reduzido de var(--space-12) */
   width: 100%;
+  overflow-y: auto; /* Permite scroll interno se necessário */
+  height: calc(100vh - var(--header-height) - 60px); /* Altura total menos header e footer */
 }
 
 .section {
   display: none;
   animation: fadeIn 400ms ease;
+  min-height: 100%;
 }
 .section.active { display: block; }
 
@@ -124,21 +132,33 @@ body {
 }
 
 .site-footer {
-  padding: var(--space-8) var(--space-6);
+  padding: var(--space-4) var(--space-6); /* Reduzido */
   text-align: center;
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
 }
 
-/* RESPONSIVO */
+/* MOBILE - PODE TER SCROLL */
 @media (max-width: 768px) {
+  body {
+    overflow-y: auto; /* Permite scroll no mobile */
+    height: auto;
+  }
+  
+  .site-main {
+    overflow-y: visible;
+    height: auto;
+    padding: var(--space-6) var(--space-4);
+  }
+  
   .header-inner { gap: var(--space-4); }
   .step-label { display: none; }
   .step { padding: var(--space-3); }
   .step:not(:last-child)::after { width: 8px; right: -4px; }
   :root {
     --text-4xl: 2.25rem;
-    --text-5xl: 3rem;
+    --text-5xl: 2.5rem; /* Reduzido */
   }
 }
