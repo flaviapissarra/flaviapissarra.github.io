@@ -6,30 +6,23 @@ const sections = document.querySelectorAll('.section');
 const gotoButtons = document.querySelectorAll('[data-goto]');
 
 function activateSection(sectionId) {
-  // Atualiza stepper
   steps.forEach(s => s.classList.remove('active'));
   const targetStep = document.querySelector(`.step[data-section="${sectionId}"]`);
   if (targetStep) targetStep.classList.add('active');
 
-  // Atualiza seção visível
   sections.forEach(s => s.classList.remove('active'));
   const targetSection = document.getElementById(sectionId);
   if (targetSection) targetSection.classList.add('active');
 
-  // Scroll para o topo suavemente
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 steps.forEach(step => {
-  step.addEventListener('click', () => {
-    activateSection(step.dataset.section);
-  });
+  step.addEventListener('click', () => activateSection(step.dataset.section));
 });
 
 gotoButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    activateSection(btn.dataset.goto);
-  });
+  btn.addEventListener('click', () => activateSection(btn.dataset.goto));
 });
 
 // ============================================
@@ -46,8 +39,7 @@ async function loadJSON(path) {
   }
 }
 
-// Helper seguro para ler chaves com espaços nos seus JSONs atuais
-// Ex: obj["id "] ou obj["id"]
+// Helper para ler chaves com espaços
 const k = (obj, key) => {
   if (!obj) return '';
   return obj[key] ?? obj[key + ' '] ?? obj[key.trim()] ?? '';
@@ -135,9 +127,8 @@ async function renderLanguages() {
     const lang = k(l, 'lang').trim();
     const level = k(l, 'level').trim();
     const details = k(l, 'details').trim();
+    const firstDetail = details.split('•')[0].trim();
     
-    const firstDetail = details.split('•')[0].trim(); 
-
     return `
       <div class="language-card">
         <div class="lang-title">${icon} ${lang} - ${level} - ${firstDetail}</div>
@@ -148,7 +139,7 @@ async function renderLanguages() {
 }
 
 // ============================================
-// INIT - Carrega tudo quando a página abre
+// INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
   renderProjects();
