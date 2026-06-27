@@ -1,52 +1,47 @@
 /* ============================================
-   HERO SECTION - LARGURA TOTAL
+   HERO SECTION - OTIMIZADO PARA CABER NA TELA
    ============================================ */
 .hero {
-  padding: var(--space-12) 0 var(--space-8);
-  max-width: 100%; /* Ocupa toda a largura disponível */
-  min-height: 40vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: var(--space-8) 0 var(--space-6);
+  max-width: 800px;
 }
 
 .hero-greeting {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--color-text-muted);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: var(--text-5xl);
-  font-weight: 250;
+  font-size: var(--text-4xl);
+  font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 .hero-subtitle {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--color-accent);
-  font-weight: 250;
-  margin-bottom: var(--space-6);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
 }
 
 .hero-description {
-  font-size: var(--text-sm);
+  font-size: var(--text-sm); /* Fonte um pouco menor para caber melhor */
   color: var(--color-text-muted);
-  max-width: 100%;
-  margin-bottom: var(--space-8);
-  line-height: 1.4;
+  max-width: 100%; /* Remove o limite de 600px, fazendo o texto correr a tela toda */
+  margin-bottom: var(--space-6);
+  line-height: 1.4; /* Linhas um pouco mais compactas */
 }
 
 .hero-actions {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-3);
   flex-wrap: wrap;
-  margin-top: auto;
 }
 
 /* ============================================
@@ -83,61 +78,53 @@
 .btn-ghost:hover { border-color: var(--color-text); }
 
 /* ============================================
-   HOME GRID - 3 COLUNAS LARGAS
+   HOME GRID - OTIMIZADO
    ============================================ */
 .home-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-  margin-top: var(--space-8);
-  padding-top: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
   border-top: 1px solid var(--color-border);
-  min-height: 35vh;
-  width: 100%; /* Largura total */
 }
 
 .home-card {
-  padding: var(--space-6);
+  padding: var(--space-4);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   transition: all var(--transition-base);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 200px;
 }
 .home-card:hover {
   border-color: var(--color-accent);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px -8px rgba(15, 118, 110, 0.2);
+  transform: translateY(-2px);
 }
 
 .home-card-label {
   font-family: var(--font-serif);
   font-style: italic;
   color: var(--color-accent);
-  font-size: var(--text-lg);
+  font-size: var(--text-xs);
   display: block;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
 }
 
 .home-card h3 {
   font-family: var(--font-serif);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 600;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .home-card p {
   color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  line-height: 1.6;
-  margin-top: auto;
+  font-size: var(--text-xs);
+  line-height: 1.5;
 }
 
 /* ============================================
-   SECTIONS GENERAL
+   SECTIONS GENERAL - OTIMIZADO
    ============================================ */
 .section-header {
   margin-bottom: var(--space-6);
@@ -437,7 +424,7 @@
 }
 
 /* ============================================
-   CONTACT - LAYOUT HORIZONTAL EM 4 COLUNAS
+   CONTACT
    ============================================ */
 .contact-card {
   background: var(--color-surface);
@@ -445,7 +432,7 @@
   border-radius: var(--radius-lg);
   padding: var(--space-8);
   text-align: center;
-  max-width: 100%;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -458,14 +445,14 @@
 
 .contact-card > p {
   color: var(--color-text-muted);
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
   font-size: var(--text-sm);
 }
 
 .contact-links {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .contact-link {
@@ -496,40 +483,12 @@
   transform: translateX(4px);
 }
 
-/* RESPONSIVO */
-@media (max-width: 900px) {
-  .contact-links {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .contact-links {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-card {
-    padding: var(--space-6);
-  }
-}
-
 /* ============================================
    MOBILE OPTIMIZATIONS
    ============================================ */
-@media (max-width: 900px) {
-  .home-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .masonry-grid {
-    column-count: 2;
-  }
-}
-
 @media (max-width: 768px) {
   .hero {
-    min-height: auto;
-    padding: var(--space-6) 0;
+    padding: var(--space-6) 0 var(--space-4);
   }
   
   .hero-title {
@@ -538,11 +497,6 @@
   
   .home-grid {
     grid-template-columns: 1fr;
-    min-height: auto;
-  }
-  
-  .home-card {
-    min-height: auto;
   }
   
   .masonry-grid {
