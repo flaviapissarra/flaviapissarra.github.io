@@ -7,6 +7,7 @@
 
 html { 
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
   height: 100%;
 }
 
@@ -17,19 +18,20 @@ body {
   color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
-/* HEADER / STEPPER */
+/* HEADER FIXO */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  background: rgba(250, 250, 248, 0.92);
-  backdrop-filter: blur(8px);
+  background: rgba(250, 250, 248, 0.95);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   height: var(--header-height);
   flex-shrink: 0;
@@ -54,85 +56,88 @@ body {
   letter-spacing: -0.02em;
 }
 
-.stepper {
+/* NAVEGAÇÃO */
+.nav-links {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: var(--space-6);
   flex: 1;
   overflow-x: auto;
   scrollbar-width: none;
 }
-.stepper::-webkit-scrollbar { display: none; }
+.nav-links::-webkit-scrollbar { display: none; }
 
-.step {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-text-muted);
+.nav-link {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
   white-space: nowrap;
   transition: color var(--transition-fast);
   position: relative;
+  padding: var(--space-1) 0;
 }
 
-.step:hover { color: var(--color-text); }
-.step.active { color: var(--color-accent); }
+.nav-link:hover { color: var(--color-text); }
 
-.step-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-border-strong);
-  transition: all var(--transition-fast);
+.nav-link.active {
+  color: var(--color-accent);
 }
 
-.step.active .step-dot {
-  background: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light);
-}
-
-.step:not(:last-child)::after {
+.nav-link.active::after {
   content: '';
   position: absolute;
-  right: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 1px;
-  background: var(--color-border);
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
 }
 
 /* MAIN */
 .site-main {
   flex: 1;
-  max-width: var(--max-width);
+  max-width: 900px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-6);
+  padding: calc(var(--header-height) + var(--space-12)) var(--space-6) var(--space-16);
   width: 100%;
-  overflow-y: auto;
-  height: calc(100vh - var(--header-height) - 60px);
 }
 
+/* SEÇÕES */
 .section {
-  display: none;
-  animation: fadeIn 400ms ease;
-  min-height: 100%;
-}
-.section.active { display: block; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  padding: var(--space-12) 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
+.section:last-child {
+  border-bottom: none;
+}
+
+.section-header {
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* FOOTER */
 .site-footer {
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-6) var(--space-6);
   text-align: center;
   color: var(--color-text-muted);
   font-size: var(--text-sm);
@@ -142,23 +147,20 @@ body {
 
 /* MOBILE */
 @media (max-width: 768px) {
-  body {
-    overflow-y: auto;
-    height: auto;
+  .header-inner { 
+    gap: var(--space-4);
+    padding: 0 var(--space-4);
   }
   
   .site-main {
-    overflow-y: visible;
-    height: auto;
-    padding: var(--space-6) var(--space-4);
+    padding: calc(var(--header-height) + var(--space-8)) var(--space-4) var(--space-12);
   }
   
-  .header-inner { gap: var(--space-4); }
-  .step-label { display: none; }
-  .step { padding: var(--space-3); }
-  .step:not(:last-child)::after { width: 8px; right: -4px; }
-  :root {
-    --text-4xl: 2.25rem;
-    --text-5xl: 2.5rem;
+  .section {
+    padding: var(--space-8) 0;
+  }
+  
+  .section-title {
+    font-size: var(--text-2xl);
   }
 }
