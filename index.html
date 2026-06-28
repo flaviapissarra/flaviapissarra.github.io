@@ -16,32 +16,14 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a href="#" class="logo" data-section="home">flaviapp</a>
-      <nav class="stepper" id="stepper">
-        <button class="step active" data-section="home">
-          <span class="step-dot"></span>
-          <span class="step-label">Home</span>
-        </button>
-        <button class="step" data-section="projects">
-          <span class="step-dot"></span>
-          <span class="step-label">Projects</span>
-        </button>
-        <button class="step" data-section="translation">
-          <span class="step-dot"></span>
-          <span class="step-label">Translation</span>
-        </button>
-        <button class="step" data-section="trajectory">
-          <span class="step-dot"></span>
-          <span class="step-label">Trajectory</span>
-        </button>
-        <button class="step" data-section="languages">
-          <span class="step-dot"></span>
-          <span class="step-label">Languages</span>
-        </button>
-        <button class="step" data-section="contact">
-          <span class="step-dot"></span>
-          <span class="step-label">Contact</span>
-        </button>
+      <a href="#home" class="logo">flaviapp</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#translation" class="nav-link">Translation</a>
+        <a href="#trajectory" class="nav-link">Trajectory</a>
+        <a href="#languages" class="nav-link">Languages</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
@@ -49,7 +31,7 @@
   <main class="site-main">
 
     <!-- HOME -->
-    <section class="section active" id="home">
+    <section class="section" id="home">
       <div class="hero">
         <p class="hero-greeting">welcome · bem-vindo(a) · bienvenido(a) · bienvenue · ようこそ · 환영합니다</p>
         <h1 class="hero-title">Flávia Pissarra</h1>
@@ -58,8 +40,8 @@
           Charting data, language and global trade. Navigating a career transition from education to international logistics, data intelligence, and multilingual communication.
         </p>
         <div class="hero-actions">
-          <button class="btn btn-primary" data-goto="projects">View Projects</button>
-          <button class="btn btn-ghost" data-goto="trajectory">My Trajectory</button>
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#trajectory" class="btn btn-ghost">My Trajectory</a>
         </div>
       </div>
 
@@ -120,10 +102,6 @@
 
     <!-- CONTACT -->
     <section class="section" id="contact">
-      <!--div class="section-header">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-subtitle">Let's connect.</p>
-      </div-->
       <div class="contact-card">
         <h3>Get in touch</h3>
         <p>Open to collaborations in BI, translation and international trade projects.</p>
