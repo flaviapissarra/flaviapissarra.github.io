@@ -1,28 +1,60 @@
 // ============================================
-// NAVEGAÇÃO POR STEPPER
+// NAVEGAÇÃO POR SCROLL SUAVE
 // ============================================
-const steps = document.querySelectorAll('.step');
+const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('.section');
-const gotoButtons = document.querySelectorAll('[data-goto]');
 
-function activateSection(sectionId) {
-  steps.forEach(s => s.classList.remove('active'));
-  const targetStep = document.querySelector(`.step[data-section="${sectionId}"]`);
-  if (targetStep) targetStep.classList.add('active');
+// IntersectionObserver para destacar o link ativo conforme rola
+const observerOptions = {
+  root: null,
+  rootMargin: '-20% 0px -80% 0px',
+  threshold: 0
+};
 
-  sections.forEach(s => s.classList.remove('active'));
-  const targetSection = document.getElementById(sectionId);
-  if (targetSection) targetSection.classList.add('active');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      
+      // Remove active de todos os links
+      navLinks.forEach(link => link.classList.remove('active'));
+      
+      // Adiciona active no link correspondente
+      const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, observerOptions);
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+// Observa todas as seções
+sections.forEach(section => observer.observe(section));
 
-steps.forEach(step => {
-  step.addEventListener('click', () => activateSection(step.dataset.section));
+// Smooth scroll para links de navegação
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetId);
+    
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 });
 
-gotoButtons.forEach(btn => {
-  btn.addEventListener('click', () => activateSection(btn.dataset.goto));
+// Smooth scroll para links no hero (View Projects, My Trajectory)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  if (!anchor.classList.contains('nav-link')) {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
 });
 
 // ============================================
