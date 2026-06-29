@@ -193,6 +193,7 @@ body {
 .timeline-dot { position: absolute; left: calc(-1 * var(--space-2) - var(--space-6) + 1px); top: 20px; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); border: 2px solid var(--color-bg); }
 .timeline-type { font-size: var(--text-xs); color: var(--color-accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-1); }
 .timeline-date { font-family: var(--font-serif); font-style: italic; color: var(--color-text-muted); font-size: var(--text-xs); margin-bottom: var(--space-1); }
+.timeline-company { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); }
 .timeline-item h3 { font-family: var(--font-serif); font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-1); }
 .timeline-item p { color: var(--color-text-muted); font-size: var(--text-xs); }
 
