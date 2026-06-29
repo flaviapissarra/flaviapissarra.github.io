@@ -169,15 +169,18 @@ async function renderTimeline() {
   const data = await loadJSON('data/timeline.json');
   const el = document.getElementById('timeline');
   if (!data || !el) return;
+  
   el.innerHTML = data.map(i => `
-    <div class="timeline-item">
+    <div class="timeline-item" id="${i.id}">
       <div class="timeline-dot"></div>
-      ${k(i, 'icon') ? `<div style="font-size:var(--text-xl); margin-bottom:var(--space-2)">${k(i, 'icon')}</div>` : ''}
+      ${k(i, 'icon') ? `<div class="timeline-icon">${k(i, 'icon')}</div>` : ''}
       <div class="timeline-type">${k(i, 'type')}</div>
       <div class="timeline-date">${k(i, 'date')}</div>
+      <div class="timeline-company">${k(i, 'company')}</div>
       <h3>${k(i, 'title')}</h3>
       <p>${k(i, 'description')}</p>
-    </div>`).join('');
+    </div>
+  `).join('');
 }
 
 async function renderLanguages() {
