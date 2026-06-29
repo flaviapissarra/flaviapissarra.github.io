@@ -1,42 +1,42 @@
 [
   {
-    "id": "teaching-start",
+    "id": "translator-preply",
     "type": "experience",
-    "date": "2018–2024",
-    "title": "Language & Communications Educator",
-    "description": "Developed cross-cultural communication curricula. Honed skills in knowledge transfer, public speaking, and multilingual facilitation.",
-    "icon": "📚"
-  },
-  {
-    "id": "translation-cert",
-    "type": "education",
-    "date": "2023",
-    "title": "Technical Translation Certification",
-    "description": "Advanced training in CAT tools, terminology management, and legal/technical localization standards.",
-    "icon": "🎓"
-  },
-  {
-    "id": "bi-bootcamp",
-    "type": "education",
-    "date": "2024",
-    "title": "Business Intelligence & Data Analysis",
-    "description": "Built end-to-end dashboards for supply chain and education metrics. Focused on data storytelling and actionable insights.",
+    "date": "2016–Present",
+    "title": "Translator & LLM Evaluator",
+    "description": "MTPE, LLM Evaluation, Linguistic Quality Assurance (LQA) for EN/ES/PT datasets. Terminology databases, translation memories, AI training data.",
     "icon": ""
   },
   {
-    "id": "trade-logistics",
-    "type": "education",
-    "date": "2025–Present",
-    "title": "International Foreign Trades & Logistics",
-    "description": "Studying port operations, customs compliance, INCOTERMS, and global supply chain finance. Preparing for diplomatic & trade analysis pathways.",
-    "icon": "🚢"
+    "id": "teacher-numberone",
+    "type": "experience",
+    "date": "2024–2026",
+    "title": "English Teacher (Business & Academic)",
+    "description": "TESOL certified. Specialized instruction for corporate environments. Curriculum development, linguistic analysis (C2), student autonomy.",
+    "icon": "📜"
   },
   {
-    "id": "translation-practice",
+    "id": "researcher-ifes",
     "type": "experience",
-    "date": "2023–Present",
-    "title": "Freelance Technical Translator & Interpreter",
-    "description": "Delivering precise, culturally adapted translations for SMEs, publishers, and logistics firms. Maintaining strict confidentiality protocols.",
-    "icon": "⚓"
+    "date": "2020–2023",
+    "title": "Researcher (Humanities & Technology)",
+    "description": "Corpus Linguistics, CTecL project leadership, rhythm studies in Brazilian poetry. Translation theory, AI-assisted translation benchmarking.",
+    "icon": "🔬"
+  },
+  {
+    "id": "data-arcelor",
+    "type": "experience",
+    "date": "2019",
+    "title": "Data Scientist Intern — ArcelorMittal",
+    "description": "SQL/Python pipelines (10k+ rows/month). Power BI dashboards, workflow automation. Lead translator for international delegations.",
+    "icon": "📊"
+  },
+  {
+    "id": "data-vale",
+    "type": "experience",
+    "date": "2018",
+    "title": "Data Scientist Intern — Vale",
+    "description": "JavaScript/SQL automation, UI architecture for internal platforms. Tier-1/2 technical support, incident metrics. English interpreter.",
+    "icon": "⚙️"
   }
 ]
