@@ -103,7 +103,7 @@ async function renderProjects() {
               ` : ''}
               <div class="project-links">
                 ${k(p, 'public_link') ? `<a href="${k(p, 'public_link')}" target="_blank" rel="noopener" class="project-link">View code →</a>` : ''}
-                ${k(p, 'request_access') ? `<a href="${k(p, 'request_access')}" target="_blank" rel="noopener" class="project-link">Request demo access →</a>` : ''}
+                /* ${k(p, 'request_access') ? `<a href="${k(p, 'request_access')}" target="_blank" rel="noopener" class="project-link">Request demo access →</a>` : ''} */
               </div>
             </article>
           </div>
