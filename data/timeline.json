@@ -3,14 +3,16 @@
     "id": "translator-preply",
     "type": "experience",
     "date": "2016–Present",
+    "company": "Preply",
     "title": "Translator & LLM Evaluator",
     "description": "MTPE, LLM Evaluation, Linguistic Quality Assurance (LQA) for EN/ES/PT datasets. Terminology databases, translation memories, AI training data.",
-    "icon": ""
+    "icon": "🌐"
   },
   {
     "id": "teacher-numberone",
     "type": "experience",
     "date": "2024–2026",
+    "company": "Number One Inglês Completo",
     "title": "English Teacher (Business & Academic)",
     "description": "TESOL certified. Specialized instruction for corporate environments. Curriculum development, linguistic analysis (C2), student autonomy.",
     "icon": "📜"
@@ -19,6 +21,7 @@
     "id": "researcher-ifes",
     "type": "experience",
     "date": "2020–2023",
+    "company": "IFES",
     "title": "Researcher (Humanities & Technology)",
     "description": "Corpus Linguistics, CTecL project leadership, rhythm studies in Brazilian poetry. Translation theory, AI-assisted translation benchmarking.",
     "icon": "🔬"
@@ -27,7 +30,8 @@
     "id": "data-arcelor",
     "type": "experience",
     "date": "2019",
-    "title": "Data Scientist Intern — ArcelorMittal",
+    "company": "ArcelorMittal",
+    "title": "Data Scientist Intern",
     "description": "SQL/Python pipelines (10k+ rows/month). Power BI dashboards, workflow automation. Lead translator for international delegations.",
     "icon": "📊"
   },
@@ -35,7 +39,8 @@
     "id": "data-vale",
     "type": "experience",
     "date": "2018",
-    "title": "Data Scientist Intern — Vale",
+    "company": "Vale",
+    "title": "Data Scientist Intern",
     "description": "JavaScript/SQL automation, UI architecture for internal platforms. Tier-1/2 technical support, incident metrics. English interpreter.",
     "icon": "⚙️"
   }
