@@ -84,98 +84,96 @@ const GITHUB_REPO = 'flaviapissarra/ctecl';
 const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/p`;
 
 async function renderProjects() {
+  const grid = document.getElementById('projects-grid');
+  if (!grid) return;
+
   try {
-    // Busca a lista de pastas de projetos
-    const response = await fetch(GITHUB_API);
-    if (!response.ok) throw new Error('Failed to fetch projects list');
-    
-    const items = await response.json();
-    // Filtra apenas pastas (diretórios)
-    const projects = items.filter(item => item.type === 'dir');
-    
-    console.log('Found projects:', projects.map(p => p.name)); // Debug
-    
-    // Busca metadata de cada projeto
-    const projectsData = await Promise.all(
-      projects.map(async (project) => {
-        try {
-          // URL correta para o arquivo metadata.json na API do GitHub
-          const metadataUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/p/${project.name}/metadata.json`;
-          
-          const metadataRes = await fetch(metadataUrl);
-          if (metadataRes.ok) {
-            const metadata = await metadataRes.json();
-            // Decodifica o conteúdo (GitHub API retorna em base64)
-            const content = atob(metadata.content);
-            return JSON.parse(content);
-          }
-          
-          // Se não tiver metadata.json, cria um objeto básico
-          console.warn(`No metadata.json for ${project.name}`);
-          return {
-            domain: 'PROJECT',
-            title: formatTitle(project.name),
-            description: 'Project details coming soon...',
-            tools: [],
-            public_link: `https://flaviapissarra.github.io/ctecl/p/${project.name}/`,
-            request_access: 'mailto:flaviapissarra+githubio@gmail.com'
-          };
-        } catch (err) {
-          console.error(`Error loading metadata for ${project.name}:`, err);
-          return {
-            domain: 'PROJECT',
-            title: formatTitle(project.name),
-            description: 'Project details coming soon...',
-            tools: [],
-            public_link: `https://flaviapissarra.github.io/ctecl/p/${project.name}/`,
-            request_access: 'mailto:flaviapissarra+githubio@gmail.com'
-          };
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/p`);
+    if (!res.ok) throw new Error('API Error');
+    const items = await res.json();
+    const dirs = items.filter(i => i.type === 'dir');
+
+    const projectsData = await Promise.all(dirs.map(async (dir) => {
+      try {
+        const metaRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/p/${dir.name}/metadata.json`);
+        if (metaRes.ok) {
+          const meta = await metaRes.json();
+          return JSON.parse(atob(meta.content));
         }
-      })
-    );
+      } catch {}
+      return { domain: 'PROJECT', title: formatTitle(dir.name), description: 'Project details coming soon...', tools: [], public_link: `https://flaviapissarra.github.io/ctecl/p/${dir.name}/` };
+    }));
 
-    const grid = document.getElementById('projects-grid');
-    if (!grid || projectsData.length === 0) return;
-
-    // Cria a estrutura do carrossel
     grid.innerHTML = `
-      <div class="carousel-container">
-        <button class="carousel-btn prev" aria-label="Projeto anterior">‹</button>
-        <div class="carousel-track">
-          ${projectsData.map(p => `
-            <div class="carousel-slide">
-              <article class="project-card">
-                <div class="project-domain">${p.domain || 'PROJECT'}</div>
-                <h3>${p.title}</h3>
-                <p>${p.description}</p>
-                ${Array.isArray(p.tools) && p.tools.length > 0 ? `
-                  <div class="project-tools">
-                    ${p.tools.map(t => `<span class="tool-tag">${t}</span>`).join('')}
-                  </div>
-                ` : ''}
-                <div class="project-links">
-                  ${p.public_link ? `<a href="${p.public_link}" target="_blank" rel="noopener" class="project-link">View code →</a>` : ''}
-                  ${p.request_access ? `<a href="${p.request_access}" target="_blank" rel="noopener" class="project-link">Request demo access →</a>` : ''}
-                </div>
-              </article>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+        <div class="carousel-container">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              ${projectsData.map(p => `
+                <div class="carousel-slide">
+                  <article class="project-card">
+                    <div class="project-domain">${p.domain || 'PROJECT'}</div>
+                    <h3>${p.title}</h3>
+                    <p>${p.description}</p>
+                    ${p.tools?.length ? `<div class="project-tools">${p.tools.map(t => `<span class="tool-tag">${t}</span>`).join('')}</div>` : ''}
+                    <div class="project-links">
+                      ${p.public_link ? `<a href="${p.public_link}" target="_blank" class="project-link">View project →</a>` : ''}
+                      ${p.request_access ? `<a href="${p.request_access}" target="_blank" class="project-link">Request access →</a>` : ''}
+                    </div>
+                  </article>
+                </div>`).join('')}
             </div>
-          `).join('')}
+          </div>
         </div>
-        <button class="carousel-btn next" aria-label="Próximo projeto">›</button>
-        <div class="carousel-dots"></div>
+        <button class="carousel-btn next" aria-label="Próximo">›</button>
       </div>
-    `;
-
-    // Inicializa o carrossel
+      <div class="carousel-dots"></div>`;
+      
     initCarousel();
-    
-  } catch (error) {
-    console.error('Error loading projects:', error);
-    const grid = document.getElementById('projects-grid');
-    if (grid) {
-      grid.innerHTML = '<p style="text-align: center; color: var(--color-text-muted);">Unable to load projects. Please try again later.</p>';
-    }
+  } catch (err) {
+    grid.innerHTML = '<p style="text-align:center; color:var(--color-text-muted);">Unable to load projects right now.</p>';
   }
+}
+
+function initCarousel() {
+  const wrapper = document.querySelector('.carousel-wrapper');
+  if (!wrapper) return;
+  
+  const track = wrapper.querySelector('.carousel-track');
+  const slides = wrapper.querySelectorAll('.carousel-slide');
+  const prevBtn = wrapper.querySelector('.prev');
+  const nextBtn = wrapper.querySelector('.next');
+  const dotsContainer = wrapper.parentElement.querySelector('.carousel-dots');
+  let currentIndex = 0;
+
+  const getSlidesPerView = () => window.innerWidth >= 900 ? 3 : window.innerWidth >= 600 ? 2 : 1;
+
+  function update() {
+    const spv = getSlidesPerView();
+    const slideWidth = slides[0].offsetWidth;
+    const gap = 16;
+    track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+    
+    const totalDots = Math.ceil(slides.length / spv);
+    dotsContainer.innerHTML = Array.from({ length: totalDots }, (_, i) => 
+      `<button class="carousel-dot ${i === Math.floor(currentIndex / spv) ? 'active' : ''}" data-index="${i}"></button>`
+    ).join('');
+    
+    dotsContainer.querySelectorAll('.carousel-dot').forEach(dot => {
+      dot.onclick = () => { currentIndex = parseInt(dot.dataset.index) * spv; update(); };
+    });
+
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex >= slides.length - spv;
+  }
+
+  prevBtn.onclick = () => { if (currentIndex > 0) { currentIndex--; update(); } };
+  nextBtn.onclick = () => { if (currentIndex < slides.length - getSlidesPerView()) { currentIndex++; update(); } };
+  
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { currentIndex = 0; update(); }, 200); });
+  update();
 }
 
 // Helper para formatar títulos
