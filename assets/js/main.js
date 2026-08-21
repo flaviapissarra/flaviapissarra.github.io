@@ -1,307 +1,175 @@
-// ============================================
-// 1. NAVEGAÇÃO & SCROLL SUAVE
-// ============================================
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('.section');
+/* =========================================
+   FLAVIAPP · MAIN.JS
+   Data Loader & Dynamic Rendering
+   ========================================= */
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(link => link.classList.remove('active'));
-      const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-      if (activeLink) activeLink.classList.add('active');
-    }
-  });
-}, { rootMargin: '-20% 0px -80% 0px' });
-
-sections.forEach(section => observer.observe(section));
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.getElementById(this.getAttribute('href').substring(1));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// ============================================
-// 2. HELPERS
-// ============================================
-async function loadJSON(path) {
+// 1. HELPER: Fetch JSON safely
+async function fetchData(filename) {
   try {
-    const res = await fetch(path);
-    return res.ok ? await res.json() : null;
-  } catch { return null; }
+    const response = await fetch(`data/${filename}.json`);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error(`Error loading ${filename}:`, error);
+    return null;
+  }
 }
-const k = (obj, key) => obj ? (obj[key] ?? obj[key.trim()] ?? '') : '';
-const formatTitle = (name) => name.replace(/_/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
 
-// ============================================
-// 3. PROJETOS (CARROSSEL - DADOS HARDCODED)
-// ============================================
-async function renderProjects() {
-  const grid = document.getElementById('projects-grid');
-  if (!grid) return;
+// 2. RENDER: Projects (Research)
+async function loadProjects() {
+  const data = await fetchData('projects');
+  const container = document.getElementById('projects-grid');
+  if (!data || !container) return;
 
-  const projectsData = [
-    {
-      domain: "LOGISTICS",
-      title: "Cross-Border Freight Cost Dashboard",
-      description: "Mapped shipping variances across 12 major ports. Automated reporting reduced manual data cleaning by 65%.",
-      tools: ["Power BI", "SQL", "Python"],
-      public_link: "#",
-      request_access: "mailto:flaviapissarra+githubio@gmail.com"
-    },
-    {
-      domain: "AI/TRANSLATION",
-      title: "GenAI Translation Evaluator",
-      description: "Automated quality assessment for technical translations using LLMs and custom evaluation metrics.",
-      tools: ["Python", "OpenAI API", "Pandas"],
-      public_link: "#",
-      request_access: "mailto:flaviapissarra+githubio@gmail.com"
-    },
-    {
-      domain: "NLP",
-      title: "NLP Sentiment Analysis",
-      description: "Sentiment analysis pipeline for multilingual customer feedback and trade communications.",
-      tools: ["Python", "NLTK", "Transformers"],
-      public_link: "#",
-      request_access: "mailto:flaviapissarra+githubio@gmail.com"
-    },
-    {
-      domain: "DATA ENGINEERING",
-      title: "SQL Data Pipeline",
-      description: "ETL pipeline for automated data extraction from port logistics systems. Reduced query time by 80%.",
-      tools: ["SQL", "PostgreSQL", "Python", "Airflow"],
-      public_link: "#",
-      request_access: "mailto:flaviapissarra+githubio@gmail.com"
-    }
-  ];
-
-  grid.innerHTML = `
-    <div class="carousel-wrapper">
-      <button class="carousel-btn prev" aria-label="Anterior">‹</button>
-      <div class="carousel-container">
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            ${projectsData.map(p => `
-              <div class="carousel-slide">
-                <article class="project-card">
-                  <div class="project-domain">${p.domain}</div>
-                  <h3>${p.title}</h3>
-                  <p>${p.description}</p>
-                  ${p.tools?.length ? `<div class="project-tools">${p.tools.map(t => `<span class="tool-tag">${t}</span>`).join('')}</div>` : ''}
-                  <div class="project-links">
-                    <a href="${p.public_link}" class="project-link">View project →</a>
-                    <a href="${p.request_access}" class="project-link">Request access →</a>
-                  </div>
-                </article>
-              </div>`).join('')}
-          </div>
-        </div>
-      </div>
-      <button class="carousel-btn next" aria-label="Próximo">›</button>
-    </div>
-    <div class="carousel-dots"></div>`;
+  container.innerHTML = data.map(item => `
+    <div class="card">
+      <span class="card-category">${item.domain}</span>
+      <h3>${item.title}</h3>
+      <p>${item.description}</p>
       
-  initCarousel();
+      <div class="card-tools">
+        ${item.tools.map(tool => `<span>${tool}</span>`).join('')}
+      </div>
+      
+      <div class="card-actions">
+        ${item.public_link && item.public_link !== '#' 
+          ? `<a href="${item.public_link}" class="card-link" target="_blank">View project →</a>` 
+          : ''}
+        ${item.request_access 
+          ? `<a href="${item.request_access}" class="card-link" target="_blank">Request access →</a>` 
+          : ''}
+      </div>
+    </div>
+  `).join('');
 }
 
-function initCarousel() {
-  const wrapper = document.querySelector('.carousel-wrapper');
-  if (!wrapper) return;
-  
-  const track = wrapper.querySelector('.carousel-track');
-  const slides = wrapper.querySelectorAll('.carousel-slide');
-  const prevBtn = wrapper.querySelector('.prev');
-  const nextBtn = wrapper.querySelector('.next');
-  const dotsContainer = wrapper.parentElement.querySelector('.carousel-dots');
-  let currentIndex = 0;
+// 3. RENDER: Translations (Linguistics)
+async function loadTranslations() {
+  const data = await fetchData('translations');
+  const container = document.getElementById('translation-grid');
+  if (!data || !container) return;
 
-  const getSlidesPerView = () => window.innerWidth >= 900 ? 3 : window.innerWidth >= 600 ? 2 : 1;
+  container.innerHTML = data.map(item => `
+    <div class="card">
+      <span class="card-category">${item.domains.join(' · ')}</span>
+      <h3 class="translation-pair">${item.pair}</h3>
+      <p>${item.description}</p>
+      ${item.excerpt 
+        ? `<blockquote class="translation-excerpt">"${item.excerpt}"</blockquote>` 
+        : ''}
+      <div class="card-actions">
+        <a href="${item.request_access}" class="card-link" target="_blank">Request sample →</a>
+      </div>
+    </div>
+  `).join('');
+}
 
-  function update() {
-    const spv = getSlidesPerView();
-    const slideWidth = slides[0].offsetWidth;
-    const gap = 16;
-    track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+// 4. RENDER: Timeline (Trajectory)
+async function loadTimeline() {
+  const data = await fetchData('timeline');
+  if (!data) return;
+
+  const filterContainer = document.getElementById('timeline-filters');
+  const listContainer = document.getElementById('timeline');
+
+  // 4a. Render Filters based on Categories
+  if (filterContainer && data.categories) {
+    filterContainer.innerHTML = Object.keys(data.categories).map(key => {
+      const cat = data.categories[key];
+      return `<button class="filter-btn" data-filter="${key}">${cat.label}</button>`;
+    }).join('');
     
-    const totalDots = Math.ceil(slides.length / spv);
-    dotsContainer.innerHTML = Array.from({ length: totalDots }, (_, i) => 
-      `<button class="carousel-dot ${i === Math.floor(currentIndex / spv) ? 'active' : ''}" data-index="${i}"></button>`
-    ).join('');
-    
-    dotsContainer.querySelectorAll('.carousel-dot').forEach(dot => {
-      dot.onclick = () => { currentIndex = parseInt(dot.dataset.index) * spv; update(); };
-    });
-
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex >= slides.length - spv;
+    // Add "All" button
+    const allBtn = `<button class="filter-btn active" data-filter="all">All</button>`;
+    filterContainer.insertAdjacentHTML('afterbegin', allBtn);
   }
 
-  prevBtn.onclick = () => { if (currentIndex > 0) { currentIndex--; update(); } };
-  nextBtn.onclick = () => { if (currentIndex < slides.length - getSlidesPerView()) { currentIndex++; update(); } };
-  
-  let resizeTimer;
-  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { currentIndex = 0; update(); }, 200); });
-  update();
-}
+  // 4b. Render Rows
+  if (listContainer && data.rows) {
+    listContainer.innerHTML = data.rows.map(row => {
+      const catColor = data.categories[row.category]?.color || '#6B7280';
+      const yearRange = row.startYear === row.endYear ? row.startYear : `${row.startYear} – ${row.endYear}`;
 
-// ============================================
-// 4. TIMELINE (GANTT INTERATIVA)
-// ============================================
-async function renderTimeline() {
-  const data = await loadJSON('data/timeline.json');
-  const el = document.getElementById('timeline');
-  if (!data || !el) return;
-
-  const { startYear, endYear, categories, rows } = data;
-  const totalYears = endYear - startYear + 1;
-
-  const filtersHTML = `
-    <div class="gantt-filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      ${Object.entries(categories).map(([key, cat]) => 
-        `<button class="filter-btn" data-filter="${key}">${cat.label}</button>`
-      ).join('')}
-    </div>
-  `;
-
-  const yearsHTML = Array.from({ length: totalYears }, (_, i) => {
-    const year = startYear + i;
-    const leftPercent = (i / totalYears) * 100;
-    return `<div class="gantt-year" style="left: ${leftPercent}%">${year}</div>`;
-  }).join('');
-
-  const rowsHTML = rows.map(row => {
-    const cat = categories[row.category];
-    const leftPercent = ((row.startYear - startYear) / totalYears) * 100;
-    const widthPercent = ((row.endYear - row.startYear + 1) / totalYears) * 100;
-    const isShort = (row.endYear - row.startYear) === 0;
-
-    return `
-      <div class="gantt-row" data-category="${row.category}" data-id="${row.id}">
-        <div class="gantt-row-label">${row.label}</div>
-        <div class="gantt-row-track">
-          <div class="gantt-bar ${isShort ? 'gantt-bar-short' : ''}" 
-               style="left: ${leftPercent}%; width: ${widthPercent}%; background: ${cat.color};"
-               data-title="${row.title}"
-               data-institution="${row.institution}"
-               data-date="${row.startYear}${row.endYear !== row.startYear ? '–' + row.endYear : ''}"
-               data-description="${row.description}">
-            <span class="gantt-bar-label">${row.label.split('·')[1]?.trim() || row.label}</span>
-          </div>
+      return `
+        <div class="timeline-row" data-category="${row.category}">
+          <div class="timeline-years">${yearRange}</div>
+          <h4 class="timeline-title">${row.title}</h4>
+          <div class="timeline-institution">${row.institution}</div>
+          <p class="timeline-desc">${row.description}</p>
+          <span class="timeline-category-badge" style="color: ${catColor}; border: 1px solid ${catColor}20; background: ${catColor}10;">
+            ${data.categories[row.category]?.label || row.category}
+          </span>
         </div>
-      </div>
-    `;
-  }).join('');
+      `;
+    }).join('');
+  }
 
-  el.innerHTML = `
-    ${filtersHTML}
-    <div class="gantt-container">
-      <div class="gantt-header">
-        <div class="gantt-header-spacer"></div>
-        <div class="gantt-years-track">${yearsHTML}</div>
-      </div>
-      <div class="gantt-body">
-        ${rowsHTML}
-      </div>
-    </div>
-    <div class="gantt-legend">
-      ${Object.entries(categories).map(([key, cat]) => 
-        `<div class="legend-item"><span class="legend-color" style="background:${cat.color}"></span>${cat.label}</div>`
-      ).join('')}
-    </div>
-    <div class="gantt-tooltip" id="gantt-tooltip"></div>
-  `;
+  // 4c. Filter Logic
+  if (filterContainer) {
+    filterContainer.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('filter-btn')) return;
 
-  initGanttInteractions();
-}
+      // Update active state
+      filterContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
 
-function initGanttInteractions() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const rows = document.querySelectorAll('.gantt-row');
-  const tooltip = document.getElementById('gantt-tooltip');
-  const bars = document.querySelectorAll('.gantt-bar');
+      const filterValue = e.target.dataset.filter;
+      const rows = listContainer.querySelectorAll('.timeline-row');
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
       rows.forEach(row => {
-        if (filter === 'all' || row.dataset.category === filter) {
-          row.style.display = 'flex';
-          setTimeout(() => row.classList.add('visible'), 10);
+        if (filterValue === 'all' || row.dataset.category === filterValue) {
+          row.style.display = 'block';
         } else {
-          row.classList.remove('visible');
-          setTimeout(() => row.style.display = 'none', 300);
+          row.style.display = 'none';
         }
       });
     });
-  });
-
-  bars.forEach(bar => {
-    bar.addEventListener('mouseenter', (e) => {
-      tooltip.innerHTML = `
-        <div class="tooltip-title">${bar.dataset.title}</div>
-        <div class="tooltip-institution">${bar.dataset.institution}</div>
-        <div class="tooltip-date">${bar.dataset.date}</div>
-        <div class="tooltip-description">${bar.dataset.description}</div>
-      `;
-      tooltip.classList.add('visible');
-    });
-    bar.addEventListener('mousemove', (e) => {
-      tooltip.style.left = (e.clientX + 15) + 'px';
-      tooltip.style.top = (e.clientY + 15) + 'px';
-    });
-    bar.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('visible');
-    });
-  });
+  }
 }
 
-// ============================================
-// 5. TRANSLATION
-// ============================================
-async function renderTranslation() {
-  const data = await loadJSON('data/translations.json');
-  const grid = document.getElementById('translation-grid');
-  if (!data || !grid) return;
-  grid.innerHTML = data.map(t => `
-    <article class="translation-card">
-      <div class="translation-pair">${k(t, 'pair')}</div>
-      ${k(t, 'domains')?.length ? `<div class="project-tools">${k(t, 'domains').map(d => `<span class="tool-tag">${d}</span>`).join('')}</div>` : ''}
-      <p>${k(t, 'description')}</p>
-      ${k(t, 'excerpt') ? `<div class="translation-excerpt">"${k(t, 'excerpt')}"</div>` : ''}
-      ${k(t, 'request_access') ? `<a href="${k(t, 'request_access')}" target="_blank" class="project-link">Request sample →</a>` : ''}
-    </article>`).join('');
+// 5. RENDER: Languages
+async function loadLanguages() {
+  const data = await fetchData('languages');
+  const container = document.getElementById('languages-grid');
+  if (!data || !container) return;
+
+  container.innerHTML = data.map(item => `
+    <div class="card language-card">
+      <div class="language-flag">${item.icon}</div>
+      <h3 class="language-name">${item.lang}</h3>
+      <div class="language-level">${item.level}</div>
+      <p class="language-details">${item.details}</p>
+    </div>
+  `).join('');
 }
 
-// ============================================
-// 6. LANGUAGES
-// ============================================
-async function renderLanguages() {
-  const data = await loadJSON('data/languages.json');
-  const grid = document.getElementById('languages-grid');
-  if (!data || !grid) return;
-  grid.innerHTML = data.map(l => {
-    const details = k(l, 'details').trim();
-    const first = details.split('•')[0].trim();
-    return `
-      <div class="language-card">
-        <div class="lang-title">${k(l, 'icon')} ${k(l, 'lang')} - ${k(l, 'level')} - ${first}</div>
-        <p class="lang-desc">${details.replace(first + ' • ', '')}</p>
-      </div>`;
-  }).join('');
-}
-
-// ============================================
-// 7. INICIALIZAÇÃO
-// ============================================
+// 6. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
-  renderProjects();
-  renderTranslation();
-  renderTimeline();
-  renderLanguages();
+  // Load all data
+  loadProjects();
+  loadTranslations();
+  loadTimeline();
+  loadLanguages();
+
+  // Scroll Spy & Active Link Logic
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
+  });
 });
