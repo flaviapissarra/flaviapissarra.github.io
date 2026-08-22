@@ -84,6 +84,16 @@
       "institution": "IFES"
     },
     {
+      "id": "ifes-tads",
+      "category": "formal-edu",
+      "label": "IFES · Technology Degree in Systems Analysis and Development",
+      "title": "Technology Degree in Systems Analysis and Development",
+      "startYear": 2026,
+      "endYear": 2029,
+      "description": "Software analysis and development, programming, databases, systems modeling, testing, software engineering, and project delivery.",
+      "institution": "IFES"
+    },
+    {
       "id": "coined",
       "category": "language-school",
       "label": "Coined · Intensive Language Program",
