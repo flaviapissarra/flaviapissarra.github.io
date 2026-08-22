@@ -2,58 +2,47 @@
    FLAVIAPP · SPA LOGIC & DATA RENDERER
    ========================================= */
 
-// 1. UTILITY: Clean trailing spaces from JSON keys & values
-// This fixes issues if your JSON files have keys like "lang " instead of "lang"
+// Utility: Clean trailing spaces from JSON keys & values
 function cleanData(obj) {
   if (Array.isArray(obj)) return obj.map(cleanData);
   if (obj && typeof obj === 'object') {
     const cleaned = {};
     for (const key in obj) {
-      // Trim keys and recursively clean values
       cleaned[key.trim()] = cleanData(obj[key]);
     }
     return cleaned;
   }
-  // Trim string values
   return typeof obj === 'string' ? obj.trim() : obj;
 }
 
-// 2. NAVIGATION LOGIC
+// 1. NAVIGATION LOGIC
 const navBtns = document.querySelectorAll('.nav-btn');
 const views = document.querySelectorAll('.view');
 
 navBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    // Remove active class from all buttons and views
     navBtns.forEach(b => b.classList.remove('active'));
     views.forEach(v => v.classList.remove('active'));
-    
-    // Add active class to clicked button
     btn.classList.add('active');
-    
-    // Show corresponding view
-    const targetId = btn.dataset.target;
-    document.getElementById(targetId).classList.add('active');
-    
-    // Reset scroll to top of content area
+    document.getElementById(btn.dataset.target).classList.add('active');
     document.querySelector('.content-viewport').scrollTop = 0;
   });
 });
 
-// 3. DATA FETCHER
+// 2. DATA FETCHER
 async function fetchData(filename) {
   try {
     const response = await fetch(`data/${filename}.json`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const raw = await response.json();
-    return cleanData(raw); // Clean data before returning
+    return cleanData(raw);
   } catch (error) {
     console.error(`Failed to load ${filename}:`, error);
     return null;
   }
 }
 
-// 4. RENDER FUNCTIONS
+// 3. RENDER FUNCTIONS
 
 // --- EXPERIENCE / TIMELINE ---
 async function renderExperience() {
@@ -76,18 +65,14 @@ async function renderExperience() {
   if (listContainer && data.rows) {
     listContainer.innerHTML = data.rows.map(row => {
       const cat = categories[row.category] || {};
-      const catColor = cat.color || '#94a3b8'; // Fallback color
+      const catColor = cat.color || '#94a3b8';
       
       return `
         <div class="timeline-item" data-category="${row.category}">
-          <!-- Date matches Category Color -->
           <span class="t-year" style="color: ${catColor} !important;">${row.startYear} – ${row.endYear}</span>
-          
           <h4 class="t-title">${row.title}</h4>
           <div class="t-inst">${row.institution}</div>
           <p class="t-desc">${row.description}</p>
-          
-          <!-- Tag matches Category Color -->
           <span class="timeline-category-badge" style="color:${catColor}; border-color: ${catColor}40; background:${catColor}15;">
             ${cat.label || row.category}
           </span>
@@ -100,11 +85,8 @@ async function renderExperience() {
   if (filterContainer) {
     filterContainer.addEventListener('click', (e) => {
       if (!e.target.classList.contains('filter-btn')) return;
-      
-      // Update active state
       filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       e.target.classList.add('active');
-      
       const filter = e.target.dataset.filter;
       listContainer.querySelectorAll('.timeline-item').forEach(item => {
         item.style.display = (filter === 'all' || item.dataset.category === filter) ? 'block' : 'none';
@@ -123,9 +105,7 @@ async function renderProjects() {
     <div class="card">
       <h3>${item.title}</h3>
       <p>${item.description}</p>
-      <div class="card-tools">
-        ${item.tools.map(t => `<span>${t}</span>`).join('')}
-      </div>
+      <div class="card-tools">${item.tools.map(t => `<span>${t}</span>`).join('')}</div>
       <div style="margin-top:0.5rem; display:flex; gap:1rem;">
         ${item.public_link ? `<a href="${item.public_link}" class="card-link" target="_blank">View Project ↗</a>` : ''}
         ${item.request_access ? `<a href="${item.request_access}" class="card-link" target="_blank">Request Access </a>` : ''}
@@ -144,7 +124,7 @@ async function renderLinguistics() {
     <div class="card">
       <h3>${item.pair}</h3>
       <p>${item.description}</p>
-      ${item.excerpt ? `<blockquote style="border-left:3px solid var(--accent-blue); padding-left:0.6rem; margin:0.5rem 0; font-style:italic; color:#cbd5e1; font-size:0.8rem;">"${item.excerpt}"</blockquote>` : ''}
+      ${item.excerpt ? `<blockquote style="border-left:3px solid var(--accent-green); padding-left:0.6rem; margin:0.5rem 0; font-style:italic; color:#cbd5e1; font-size:0.8rem;">"${item.excerpt}"</blockquote>` : ''}
       <a href="${item.request_access}" class="card-link" target="_blank">Request Sample ↗</a>
     </div>
   `).join('');
@@ -166,7 +146,7 @@ async function renderLanguages() {
   `).join('');
 }
 
-// 5. INITIALIZATION
+// 4. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
   renderExperience();
   renderProjects();
