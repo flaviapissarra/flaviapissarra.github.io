@@ -65,26 +65,6 @@
       "link": "https://www.iksi.or.kr/lms/main/main.do"
     },
     {
-      "id": "ifes-ti",
-      "category": "formal-edu",
-      {
-      "label": "IFES · Technical Diploma in CS",
-      "title": "Technical Diploma in Computer Science",
-      "startYear": 2015,
-      "endYear": 2018,
-      "description": "SQL, Python, Power BI, ETL. Data Analyst internship + English Teacher Assistant.",
-      "institution": "IFES"
-      }
-      {
-      "label": "IFES · Licentiate Degree in L",
-      "title": "Licentiate Degree in Letters",
-      "startYear": 2019,
-      "endYear": 2023,
-      "description": "Corpus Linguistics, rhythm studies, LLM benchmarking. HubES+ mediator. Teacher Assistant.",
-      "institution": "IFES"
-      }    
-    },
-    {
       "id": "ifes-llp",
       "category": "formal-edu",
       "label": "IFES · Licentiate Degree in Letters",
