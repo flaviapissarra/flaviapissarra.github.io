@@ -248,7 +248,10 @@ body {
 }
 .card-link:hover { text-decoration: underline; color: var(--accent-soft); }
 
-/* TIMELINE */
+/* =========================================
+   TIMELINE - INLINE TAGS
+   ========================================= */
+
 .timeline-filters { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
 .filter-btn {
   background: rgba(255, 255, 255, 0.06);
@@ -295,17 +298,26 @@ body {
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-.t-year { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.2rem; letter-spacing: 0.04em; }
-.t-title { font-size: 0.9rem; font-weight: 600; color: #fff; margin: 0.2rem 0; }
-.t-inst { font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.4rem; }
-.t-desc { font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem; line-height: 1.5; white-space: pre-line; }
+/* Inline Header for Date + Tag */
+.t-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.t-year { 
+  font-size: 0.75rem; 
+  font-weight: 700; 
+  text-transform: uppercase; 
+  letter-spacing: 0.04em;
+}
 
 .timeline-category-badge {
-  display: inline-block;
-  margin-top: 0.6rem;
   font-size: 0.65rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 5px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-weight: 600;
@@ -313,6 +325,10 @@ body {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(6px);
 }
+
+.t-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0.2rem 0; }
+.t-inst { font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.4rem; }
+.t-desc { font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem; line-height: 1.5; white-space: pre-line; }
 
 /* LANGUAGES */
 #languages .card {
