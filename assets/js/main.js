@@ -1,19 +1,30 @@
 /* =========================================
-   FLAVIAPP · MAIN.JS (Fluid Scroll Logic)
+   FLAVIAPP · SPA LOGIC
    ========================================= */
 
-// 1. DYNAMIC BACKGROUND SCROLL EFFECT
-const blobs = document.querySelectorAll('.blob');
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY;
-  blobs.forEach((blob, i) => {
-    const speed = (i + 1) * 0.05;
-    const rotate = (i + 1) * 0.02;
-    blob.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * rotate}deg)`;
+// 1. TAB SWITCHING LOGIC
+const navBtns = document.querySelectorAll('.nav-btn');
+const views = document.querySelectorAll('.view');
+
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Remove active class from all buttons and views
+    navBtns.forEach(b => b.classList.remove('active'));
+    views.forEach(v => v.classList.remove('active'));
+
+    // Add active class to clicked button
+    btn.classList.add('active');
+
+    // Show corresponding view
+    const targetId = btn.dataset.target;
+    document.getElementById(targetId).classList.add('active');
+    
+    // Reset scroll of viewport to top
+    document.querySelector('.content-viewport').scrollTop = 0;
   });
 });
 
-// 2. DATA LOADER
+// 2. DATA LOADER (Same as before, but adapted for new IDs)
 async function fetchData(filename) {
   try {
     const response = await fetch(`data/${filename}.json`);
@@ -25,109 +36,80 @@ async function fetchData(filename) {
   }
 }
 
-// 3. RENDER: Projects
+// 3. RENDER FUNCTIONS
 async function loadProjects() {
   const data = await fetchData('projects');
   const container = document.getElementById('projects-grid');
   if (!data || !container) return;
-
   container.innerHTML = data.map(item => `
     <div class="card">
-      <span class="card-category" style="color:var(--accent-blue)">${item.domain}</span>
       <h3>${item.title}</h3>
       <p>${item.description}</p>
-      <div class="card-tools">
-        ${item.tools.map(tool => `<span>${tool}</span>`).join('')}
-      </div>
-      <div style="margin-top:1rem; display:flex; gap:1rem;">
-        ${item.public_link && item.public_link !== '#' ? `<a href="${item.public_link}" class="card-link" target="_blank">View project →</a>` : ''}
-        ${item.request_access ? `<a href="${item.request_access}" class="card-link" target="_blank">Request access →</a>` : ''}
-      </div>
+      <div class="card-tools">${item.tools.map(t => `<span>${t}</span>`).join('')}</div>
+      <a href="${item.public_link}" class="card-link" target="_blank">View Project ↗</a>
     </div>
   `).join('');
 }
 
-// 4. RENDER: Translations
 async function loadTranslations() {
   const data = await fetchData('translations');
   const container = document.getElementById('translation-grid');
   if (!data || !container) return;
-
   container.innerHTML = data.map(item => `
     <div class="card">
-      <span class="card-category" style="color:var(--accent-gold)">${item.domains.join(' · ')}</span>
       <h3>${item.pair}</h3>
       <p>${item.description}</p>
-      ${item.excerpt ? `<blockquote class="translation-excerpt">"${item.excerpt}"</blockquote>` : ''}
-      <div style="margin-top:1rem;">
-        <a href="${item.request_access}" class="card-link" target="_blank">Request sample →</a>
-      </div>
+      <a href="${item.request_access}" class="card-link" target="_blank">Request Sample ↗</a>
     </div>
   `).join('');
 }
 
-// 5. RENDER: Timeline
 async function loadTimeline() {
   const data = await fetchData('timeline');
   if (!data) return;
-
   const filterContainer = document.getElementById('timeline-filters');
   const listContainer = document.getElementById('timeline');
 
-  // Render Filters
   if (filterContainer && data.categories) {
-    filterContainer.innerHTML = Object.keys(data.categories).map(key => {
-      const cat = data.categories[key];
-      return `<button class="filter-btn" data-filter="${key}">${cat.label}</button>`;
-    }).join('');
+    filterContainer.innerHTML = Object.keys(data.categories).map(key => 
+      `<button class="filter-btn" data-filter="${key}">${data.categories[key].label}</button>`
+    ).join('');
     filterContainer.insertAdjacentHTML('afterbegin', `<button class="filter-btn active" data-filter="all">All</button>`);
   }
 
-  // Render Rows
   if (listContainer && data.rows) {
-    listContainer.innerHTML = data.rows.map(row => {
-      const yearRange = row.startYear === row.endYear ? row.startYear : `${row.startYear} – ${row.endYear}`;
-      const catLabel = data.categories[row.category]?.label || row.category;
-      
-      return `
-        <div class="timeline-row" data-category="${row.category}">
-          <span class="timeline-category-badge">${catLabel}</span>
-          <div class="timeline-years">${yearRange}</div>
-          <h4 class="timeline-title">${row.title}</h4>
-          <div class="timeline-institution">${row.institution}</div>
-          <p class="timeline-desc">${row.description}</p>
-        </div>
-      `;
-    }).join('');
+    listContainer.innerHTML = data.rows.map(row => `
+      <div class="timeline-item" data-category="${row.category}">
+        <span class="t-year">${row.startYear} – ${row.endYear}</span>
+        <h4 class="t-title">${row.title}</h4>
+        <div class="t-inst">${row.institution}</div>
+      </div>
+    `).join('');
   }
 
-  // Filter Logic
   if (filterContainer) {
     filterContainer.addEventListener('click', (e) => {
       if (!e.target.classList.contains('filter-btn')) return;
-      filterContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       e.target.classList.add('active');
-      
       const filter = e.target.dataset.filter;
-      listContainer.querySelectorAll('.timeline-row').forEach(row => {
-        row.style.display = (filter === 'all' || row.dataset.category === filter) ? 'block' : 'none';
+      listContainer.querySelectorAll('.timeline-item').forEach(item => {
+        item.style.display = (filter === 'all' || item.dataset.category === filter) ? 'block' : 'none';
       });
     });
   }
 }
 
-// 6. RENDER: Languages
 async function loadLanguages() {
   const data = await fetchData('languages');
   const container = document.getElementById('languages-grid');
   if (!data || !container) return;
-
   container.innerHTML = data.map(item => `
-    <div class="card language-card" style="text-align:center;">
-      <div class="language-flag">${item.icon}</div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:2rem; margin-bottom:0.5rem;">${item.icon}</div>
       <h3>${item.lang}</h3>
-      <div style="color:var(--accent-blue); font-weight:600; margin-bottom:0.5rem;">${item.level}</div>
-      <p style="font-size:0.85rem; color:var(--text-muted);">${item.details}</p>
+      <p style="color:var(--accent-blue); font-weight:600;">${item.level}</p>
+      <p style="font-size:0.8rem;">${item.details}</p>
     </div>
   `).join('');
 }
