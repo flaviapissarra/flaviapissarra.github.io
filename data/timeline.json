@@ -29,6 +29,17 @@
       "description": "C2 proficiency. Merit scholarship for immersion in Córdoba, Argentina.",
       "institution": "Centro Estadual de Idiomas"
     },
+    
+    {
+      "id": "ctst",
+      "category": "language-edu",
+      "label": "Circolo Trentino di Santa Teresa · Italian Language & Literature",
+      "title": "Italian Language and Literature",
+      "startYear": 2024,
+      "endYear": 2025,
+      "description": "A1 proficiency.",
+      "institution": "Circolo Trentino di Santa Teresa"
+    },
     {
       "id": "ifes-ti",
       "category": "formal-edu",
