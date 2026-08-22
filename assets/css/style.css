@@ -3,18 +3,16 @@
    ========================================= */
 
 :root {
-  /* Watery Green Palette */
   --bg-deep: #051211;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --accent-green: #2dd4bf; /* Bright aqua/teal */
+  --accent-green: #2dd4bf;
   --accent-soft: #5eead4;
   --accent-gold: #fbbf24;
   
   --font-heading: 'Fraunces', serif;
   --font-body: 'Inter', sans-serif;
   
-  /* White Matte Glass Variables */
   --glass-bg: rgba(255, 255, 255, 0.14);
   --glass-border: rgba(255, 255, 255, 0.22);
   --glass-blur: blur(36px) saturate(150%);
@@ -22,6 +20,14 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* FIX: PREVENT BLURRY TEXT */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 html, body { height: 100%; overflow: hidden; }
 
 body {
@@ -31,7 +37,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px; /* Base size for refined scaling */
+  font-size: 15px;
 }
 
 /* --- WATERY SEA BACKGROUND --- */
@@ -67,7 +73,7 @@ body {
 }
 @keyframes caustic { 0% { transform: translate(0,0); } 100% { transform: translate(-45px,-45px); } }
 
-/* --- APP CONTAINER (WHITE MATTE GLASS) --- */
+/* --- APP CONTAINER --- */
 .app-container {
   width: 92vw;
   height: 92vh;
@@ -80,9 +86,12 @@ body {
   border-radius: var(--glass-radius);
   display: flex;
   overflow: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* --- SIDEBAR (DEEP MATTE) --- */
+/* --- SIDEBAR --- */
 .frosted-sidebar {
   width: 230px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -91,6 +100,7 @@ body {
   flex-direction: column;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(24px);
+  transform: translateZ(0);
 }
 .sidebar-header { margin-bottom: 2.5rem; }
 .logo { font-family: var(--font-heading); font-size: 1.4rem; color: #fff; letter-spacing: -0.02em; }
@@ -143,7 +153,7 @@ body {
 .view.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Typography & Layout (Refined Smaller Sizes) */
+/* Typography */
 .view-header { text-align: center; margin-bottom: 2rem; }
 .view-title { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 400; margin-bottom: 0.4rem; color: #fff; }
 .view-subtitle { color: var(--text-muted); font-size: 0.85rem; max-width: 600px; margin: 0 auto 1.5rem auto; line-height: 1.5; }
@@ -166,7 +176,7 @@ body {
 .languages-grid { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
 
 /* =========================================
-   WHITE MATTE GLASS CARDS
+   WHITE MATTE GLASS CARDS - NO BLUR ON HOVER
    ========================================= */
 
 .frosted-card, .card {
@@ -180,6 +190,7 @@ body {
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
 }
 
 .frosted-card::before, .card::before {
@@ -193,13 +204,16 @@ body {
   z-index: 0;
 }
 .frosted-card:hover::before, .card:hover::before { opacity: 0.9; }
-.frosted-card > *, .card > * { position: relative; z-index: 1; }
 
+/* Content always above overlay */
+.frosted-card > *, .card > * { position: relative; z-index: 2; }
+
+/* Hover - NO SCALE to prevent blur */
 .frosted-card:hover, .card:hover {
   background: rgba(255, 255, 255, 0.18);
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-  transform: translateY(-3px) scale(1.005);
+  transform: translateY(-3px); /* Removed scale() */
 }
 
 /* About Card */
@@ -209,7 +223,7 @@ body {
   padding: 2rem;
 }
 
-/* Card Content (Smaller, Refined) */
+/* Card Content */
 .card h3 { font-size: 0.9rem; margin-bottom: 0.3rem; color: #fff; font-weight: 600; }
 .card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.7rem; }
 
@@ -234,7 +248,7 @@ body {
 }
 .card-link:hover { text-decoration: underline; color: var(--accent-soft); }
 
-/* TIMELINE (Compact & Refined) */
+/* TIMELINE */
 .timeline-filters { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
 .filter-btn {
   background: rgba(255, 255, 255, 0.06);
@@ -266,12 +280,14 @@ body {
   margin-bottom: 1.5rem;
   position: relative;
   transition: all 0.3s ease;
+  transform: translateZ(0);
 }
 .timeline-item::before {
   content: ''; position: absolute; left: -7px; top: 1.1rem;
   width: 9px; height: 9px; background: var(--accent-green); border-radius: 50%;
   box-shadow: 0 0 0 3px rgba(5, 18, 17, 0.8);
 }
+/* Hover - NO SCALE */
 .timeline-item:hover {
   background: rgba(255, 255, 255, 0.1);
   border-left-color: rgba(255, 255, 255, 0.5);
@@ -298,7 +314,7 @@ body {
   backdrop-filter: blur(6px);
 }
 
-/* LANGUAGES (Compact Cards) */
+/* LANGUAGES */
 #languages .card {
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(20px) saturate(160%);
@@ -311,6 +327,7 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 0.15rem;
+  transform: translateZ(0);
 }
 #languages .card:hover {
   background: rgba(255, 255, 255, 0.11);
@@ -322,7 +339,7 @@ body {
 #languages .card .level { font-size: 0.7rem; color: var(--accent-green); font-weight: 600; margin-bottom: 0.2rem; text-transform: uppercase; letter-spacing: 0.02em; }
 #languages .card p { font-size: 0.7rem; margin-bottom: 0; line-height: 1.35; color: var(--text-muted); }
 
-/* CONTACT (Clean & Spaced) */
+/* CONTACT */
 .contact-wrapper { max-width: 550px; margin: 0 auto; text-align: center; }
 .contact-wrapper .description { margin-bottom: 2.5rem; font-size: 0.95rem; color: var(--text-muted); }
 .contact-links { display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto; }
@@ -337,12 +354,14 @@ body {
   border-radius: 12px;
   color: #fff; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 0.9rem; font-weight: 500;
+  transform: translateZ(0);
 }
+/* Hover - NO SCALE */
 .frosted-link:hover { 
   background: rgba(255, 255, 255, 0.14); 
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px) scale(1.01);
+  transform: translateY(-2px);
 }
 .frosted-link span:last-child { opacity: 0.7; transition: all 0.3s; }
 .frosted-link:hover span:last-child { opacity: 1; transform: translateX(3px); }
