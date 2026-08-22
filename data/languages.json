@@ -34,5 +34,17 @@
     "level": "JLPT N5",
     "icon": "🇯🇵",
     "details": "Beginner • Hiragana, katakana, and basic vocabulary studies."
+  },
+  {
+    "lang": "Python",
+    "icon": "🐍"
+  },
+  {
+    "lang": "SQL",
+    "icon": "🛢️"
+  },
+  {
+    "lang": "Bash",
+    "icon": "⚙️"
   }
 ]
