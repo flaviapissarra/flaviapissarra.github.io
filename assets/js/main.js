@@ -69,13 +69,17 @@ async function renderExperience() {
       
       return `
         <div class="timeline-item" data-category="${row.category}">
-          <span class="t-year" style="color: ${catColor} !important;">${row.startYear} – ${row.endYear}</span>
+          <!-- Inline Header: Date + Tag -->
+          <div class="t-header">
+            <span class="t-year" style="color: ${catColor} !important;">${row.startYear} – ${row.endYear}</span>
+            <span class="timeline-category-badge" style="color:${catColor}; border-color: ${catColor}40; background:${catColor}15;">
+              ${cat.label || row.category}
+            </span>
+          </div>
+          
           <h4 class="t-title">${row.title}</h4>
           <div class="t-inst">${row.institution}</div>
           <p class="t-desc">${row.description}</p>
-          <span class="timeline-category-badge" style="color:${catColor}; border-color: ${catColor}40; background:${catColor}15;">
-            ${cat.label || row.category}
-          </span>
         </div>
       `;
     }).join('');
