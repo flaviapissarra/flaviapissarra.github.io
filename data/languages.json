@@ -1,50 +1,56 @@
 [
   {
     "lang": "Portuguese",
-    "level": "CEFR C2 - Native",
+    "level": "Expertise, CEFR C2, Native",
     "icon": "🇧🇷",
-    "details": "Expertise in technical, academic, and diplomatic writing, alongside trade and logistics translation and interpretation."
+    "details": "Technical, academic and diplomatic writing, translation and interpretation."
   },
   {
     "lang": "English",
-    "level": "CEFR C2",
+    "level": "Expertise, CEFR C2, Full fluency",
     "icon": "🇬🇧",
-    "details": "Full fluency • Expertise in technical, academic, and diplomatic writing, alongside trade and logistics translation and interpretation."
+    "details": "Technical, academic, and diplomatic writing, translation and interpretation."
   },
   {
     "lang": "Spanish",
-    "level": "CEFR C2",
+    "level": "Expertise, CEFR C2, Full fluency",
     "icon": "🇪🇸",
-    "details": "Full fluency • Expertise in technical, academic, and diplomatic writing, alongside trade and logistics translation and interpretation."
+    "details": "Technical, academic, and diplomatic writing, translation and interpretation."
   },
   {
     "lang": "Italian",
-    "level": "CEFR A2",
+    "level": "Elementary, CEFR A2",
     "icon": "🇮🇹",
-    "details": "Elementary • Focus on export documentation and international trade terminology."
+    "details": "Export documentation, international trade terminology and Literature."
   },
   {
     "lang": "Korean",
-    "level": "TOPIK I-1",
+    "level": "Elementary, TOPIK I-1",
     "icon": "🇰🇷",
-    "details": "Beginner • Hangeul, Intercultural communication and diplomacy focus."
+    "details": "Hangeul. Intercultural communication and diplomacy focus."
   },
   {
     "lang": "Japanese",
-    "level": "JLPT N5",
+    "level": "Elementary, JLPT N5",
     "icon": "🇯🇵",
-    "details": "Beginner • Hiragana, katakana, and basic vocabulary studies."
+    "details": "Hiragana, katakana, kanji. Intercultural communication and diplomacy focus."
   },
   {
     "lang": "Python",
-    "icon": "🐍"
+    "level": "...",
+    "icon": "🐍",
+    "details": "..."
   },
   {
     "lang": "SQL",
+    "details": "..."
     "icon": "🛢️"
+    "details": "..."
   },
   {
     "lang": "Bash",
+    "details": "..."
     "icon": "⚙️"
+    "details": "..."
   }
 ]
