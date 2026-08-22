@@ -17,7 +17,8 @@
       "startYear": 2011,
       "endYear": 2015,
       "description": "C2 fluency foundation. Syntax, Semantics, Phonetics for NLP and Machine Translation.",
-      "institution": "Ufes (Núcleo de Línguas)"
+      "institution": "Ufes (Núcleo de Línguas)",
+      "link": "https://nucleodelinguas.ufes.br/"
     },
     {
       "id": "sedu-cei",
@@ -27,9 +28,9 @@
       "startYear": 2012,
       "endYear": 2015,
       "description": "C2 proficiency. Merit scholarship for immersion in Córdoba, Argentina.",
-      "institution": "Centro Estadual de Idiomas"
+      "institution": "Centro Estadual de Idiomas",
+      "link": "https://sedu.es.gov.br/centro-estadual-de-idiomas-cei"
     },
-    
     {
       "id": "ctst",
       "category": "language-edu",
@@ -38,7 +39,19 @@
       "startYear": 2024,
       "endYear": 2025,
       "description": "A1 proficiency.",
-      "institution": "Circolo Trentino di Santa Teresa"
+      "institution": "Circolo Trentino di Santa Teresa",
+      "link": "https://circolotrentinost.com.br/"     
+    },    
+    {
+      "id": "duo",
+      "category": "language-edu",
+      "label": "Duolingo · Korean Language",
+      "title": "Korean Language",
+      "startYear": 2026,
+      "endYear": 2028,
+      "description": "Studying for TOPIK I 1. Elementary proficiency.",
+      "institution": "Duolingo",
+      "link": "https://www.duolingo.com"
     },
     {
       "id": "ifes-ti",
