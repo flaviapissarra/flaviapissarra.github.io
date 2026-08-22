@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flávia Pissarra · AI Research</title>
-  <meta name="description" content="AI Researcher & Computational Linguist." />
+  <title>Flávia Pissarra · AI Research & Data Integrity</title>
+  <meta name="description" content="Data Analyst and Computational Linguist transitioning to Cybersecurity and Fraud Prevention." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Fraunces:ital,wght@0,400;0,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,wght@0,400;0,600&display=swap" rel="stylesheet" />
   
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-  <!-- LIQUID LAMP BACKGROUND -->
+  <!-- LIQUID SEA BACKGROUND -->
   <div class="liquid-bg">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -25,7 +25,7 @@
   <!-- FROSTED GLASS APP CONTAINER -->
   <div class="app-container">
     
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR NAVIGATION -->
     <aside class="frosted-sidebar">
       <div class="sidebar-header">
         <h1 class="logo">flaviapp</h1>
@@ -34,9 +34,10 @@
       
       <nav class="sidebar-nav">
         <button class="nav-btn active" data-target="home">Home</button>
-        <button class="nav-btn" data-target="research">Research</button>
+        <button class="nav-btn" data-target="about">About</button>
+        <button class="nav-btn" data-target="experience">Experience</button>
+        <button class="nav-btn" data-target="projects">Projects</button>
         <button class="nav-btn" data-target="linguistics">Linguistics</button>
-        <button class="nav-btn" data-target="trajectory">Trajectory</button>
         <button class="nav-btn" data-target="languages">Languages</button>
         <button class="nav-btn" data-target="contact">Contact</button>
       </nav>
@@ -47,68 +48,74 @@
       </div>
     </aside>
 
-    <!-- CONTENT VIEWPORT -->
+    <!-- DYNAMIC CONTENT VIEWPORT -->
     <main class="content-viewport">
       
       <!-- HOME -->
       <section id="home" class="view active">
         <div class="hero-content">
-          <p class="greeting">welcome · bem-vindo(a) · ようこそ</p>
+          <p class="greeting">welcome · bem-vindo(a) · ようこそ · 환영합니다</p>
           <h2 class="view-title">Flávia Pissarra</h2>
-          <p class="subtitle">AI Researcher · Data Analyst · Computational Linguist</p>
-          <p class="description">
-            Evaluating AI through the lens of language. I specialize in LLM benchmarking, hallucination detection, and secure multilingual data pipelines.
+          <p class="subtitle">Data Analyst & Computational Linguist</p>
+          <p class="hero-tagline">Transitioning to Cybersecurity, Fraud Prevention & Trust & Safety | Python, SQL | Multilingual: PT, EN, ES, IT, JP, KO</p>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="view">
+        <div class="view-header">
+          <h2 class="view-title">About</h2>
+        </div>
+        <div class="frosted-card" style="padding: 2rem;">
+          <p style="line-height: 1.7; color: #cbd5e1; margin-bottom: 1rem;">
+            Data Analyst & Linguist transitioning into <strong>Cybersecurity, Fraud Prevention, and Trust & Safety</strong>.
           </p>
-          <div class="hero-stats">
-            <div class="stat-card frosted-card">
-              <span class="stat-num">5+</span>
-              <span class="stat-label">Years Exp.</span>
-            </div>
-            <div class="stat-card frosted-card">
-              <span class="stat-num">6</span>
-              <span class="stat-label">Languages</span>
-            </div>
-            <div class="stat-card frosted-card">
-              <span class="stat-num">50k+</span>
-              <span class="stat-label">Samples Evaluated</span>
-            </div>
+          <p style="line-height: 1.7; color: #cbd5e1; margin-bottom: 1rem;">
+            I leverage <strong>Python, SQL, and Power BI</strong> to audit data, automate pipelines, and flag operational anomalies. Structural linguistics across <strong>6 languages</strong> gives me a unique edge in detecting phishing, social engineering, and adversarial patterns in multilingual AI systems.
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="skill-tag">LLM Benchmarking</span>
+            <span class="skill-tag">Data Integrity</span>
+            <span class="skill-tag">Anomaly Detection</span>
+            <span class="skill-tag">Fraud Prevention</span>
+            <span class="skill-tag">Cross-Lingual NLP</span>
           </div>
         </div>
       </section>
 
-      <!-- RESEARCH -->
-      <section id="research" class="view">
+      <!-- EXPERIENCE -->
+      <section id="experience" class="view">
         <div class="view-header">
-          <h2 class="view-title">Research & AI Projects</h2>
-          <p class="view-subtitle">LLM benchmarking, hallucination detection, and secure data pipeline design.</p>
+          <h2 class="view-title">Experience & Education</h2>
+          <p class="view-subtitle">A timeline of technical, linguistic, and research milestones.</p>
         </div>
-        <div class="grid-container" id="projects-grid"></div>
+        <div class="timeline-filters" id="timeline-filters"></div>
+        <div class="timeline-list" id="timeline"></div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="view">
+        <div class="view-header">
+          <h2 class="view-title">Projects & Research</h2>
+          <p class="view-subtitle">Data pipelines, BI dashboards, and AI evaluation frameworks.</p>
+        </div>
+        <div class="grid-container single-col-grid" id="projects-grid"></div>
       </section>
 
       <!-- LINGUISTICS -->
       <section id="linguistics" class="view">
         <div class="view-header">
           <h2 class="view-title">Computational Linguistics</h2>
-          <p class="view-subtitle">Multilingual semantic analysis and gold-standard dataset methodology.</p>
+          <p class="view-subtitle">Technical translation, cross-lingual analysis, and gold-standard dataset design.</p>
         </div>
-        <div class="grid-container" id="translation-grid"></div>
-      </section>
-
-      <!-- TRAJECTORY -->
-      <section id="trajectory" class="view">
-        <div class="view-header">
-          <h2 class="view-title">Trajectory</h2>
-          <p class="view-subtitle">Education and experience bridging linguistics, data, and AI safety.</p>
-        </div>
-        <div class="timeline-filters" id="timeline-filters"></div>
-        <div class="timeline-list" id="timeline"></div>
+        <div class="grid-container single-col-grid" id="translation-grid"></div>
       </section>
 
       <!-- LANGUAGES -->
       <section id="languages" class="view">
         <div class="view-header">
           <h2 class="view-title">Languages</h2>
-          <p class="view-subtitle">Proficiency levels and focus areas.</p>
+          <p class="view-subtitle">Proficiency levels and domain focus.</p>
         </div>
         <div class="grid-container languages-grid" id="languages-grid"></div>
       </section>
@@ -117,7 +124,7 @@
       <section id="contact" class="view">
         <div class="contact-wrapper">
           <h2 class="view-title">Get in Touch</h2>
-          <p class="description">Open to collaborations in AI safety, NLP evaluation, and data integrity.</p>
+          <p class="description">Open to collaborations in AI Safety, NLP Evaluation, Data Integrity, and Cybersecurity/Fraud Prevention.</p>
           
           <div class="contact-links">
             <a href="https://www.linkedin.com/in/flaviapissarra" target="_blank" class="frosted-link">
