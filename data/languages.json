@@ -1,56 +1,64 @@
 [
   {
-    "lang": "Portuguese",
-    "level": "Expertise, CEFR C2, Native",
-    "icon": "🇧🇷",
-    "details": "Technical, academic and diplomatic writing, translation and interpretation."
+    "lang":"Portuguese",
+    "level":"Expertise - CERF C2 - Native",
+    "icon":"🇧🇷",
+    "details":"Technical, Academic and Diplomatic writing. Translation and Interpretation."
   },
+  
   {
-    "lang": "English",
-    "level": "Expertise, CEFR C2, Full fluency",
-    "icon": "🇬🇧",
-    "details": "Technical, academic, and diplomatic writing, translation and interpretation."
+    "lang":"English",
+    "level":"Expertise, CEFR C2, Full fluency",
+    "icon":"🇬🇧",
+    "details":"Technical, academic, and diplomatic writing, translation and interpretation."
   },
+  
   {
-    "lang": "Spanish",
-    "level": "Expertise, CEFR C2, Full fluency",
-    "icon": "🇪🇸",
-    "details": "Technical, academic, and diplomatic writing, translation and interpretation."
+    "lang":"Spanish",
+    "level":"Expertise, CEFR C2, Full fluency",
+    "icon":"🇪🇸",
+    "details":"Technical, academic, and diplomatic writing, translation and interpretation."
   },
+  
   {
-    "lang": "Italian",
-    "level": "Elementary, CEFR A2",
-    "icon": "🇮🇹",
-    "details": "Export documentation, international trade terminology and Literature."
+    "lang":"Italian",
+    "level":"Elementary, CEFR A2",
+    "icon":"🇮🇹",
+    "details":"Export documentation, international trade terminology and Literature."
   },
+  
   {
-    "lang": "Korean",
-    "level": "Elementary, TOPIK I-1",
-    "icon": "🇰🇷",
-    "details": "Hangeul. Intercultural communication and diplomacy focus."
+    "lang":"Japanese",
+    "level":"Elementary, JLPT N5",
+    "icon":"🇯🇵",
+    "details":"Hiragana, katakana, kanji. Intercultural communication and diplomacy focus."
   },
+
   {
-    "lang": "Japanese",
-    "level": "Elementary, JLPT N5",
-    "icon": "🇯🇵",
-    "details": "Hiragana, katakana, kanji. Intercultural communication and diplomacy focus."
+    "lang":"Korean",
+    "level":"Elementary, TOPIK I-1",
+    "icon":"🇰🇷",
+    "details":"Hangeul. Intercultural communication and diplomacy focus."
   },
+  
   {
-    "lang": "Python",
-    "level": "...",
-    "icon": "🐍",
-    "details": "..."
+    "lang":"Python",
+    "level":"1",
+    "icon":"🐍",
+    "details":"1"
   },
+  
   {
-    "lang": "SQL",
-    "details": "..."
-    "icon": "🛢️"
-    "details": "..."
+    "lang":"SQL",
+    "level":"1",
+    "icon":"🛢️",
+    "details":"1"
   },
+
   {
-    "lang": "Bash",
-    "details": "..."
-    "icon": "⚙️"
-    "details": "..."
+    "lang":"Bash",
+    "level":"1",
+    "icon":"⚙️",
+    "details":"1"
   }
 ]
