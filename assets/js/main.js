@@ -85,7 +85,7 @@ async function renderExperience() {
       
       return `
         <div class="timeline-item" data-category="${row.category}">
-          <!-- Date matches Category Color -->
+          <!-- Inline Header: Date + Tag -->
           <div class="t-header">
             <span class="t-year" style="color: ${catColor} !important;">${row.startYear} – ${row.endYear}</span>
             <span class="timeline-category-badge" style="color:${catColor}; border-color: ${catColor}40; background:${catColor}15;">
@@ -105,11 +105,8 @@ async function renderExperience() {
   if (filterContainer) {
     filterContainer.addEventListener('click', (e) => {
       if (!e.target.classList.contains('filter-btn')) return;
-      
-      // Update active state
       filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       e.target.classList.add('active');
-      
       const filter = e.target.dataset.filter;
       listContainer.querySelectorAll('.timeline-item').forEach(item => {
         item.style.display = (filter === 'all' || item.dataset.category === filter) ? 'block' : 'none';
@@ -160,16 +157,18 @@ async function renderLanguages() {
   const data = await fetchData('languages');
   const container = document.getElementById('languages-grid');
   
-  // Safety check: if data is empty or container missing
   if (!data || !container) {
-    console.warn("Languages data or container not found.");
+    console.error("Languages data or container missing!");
     return;
   }
   
+  // Note: Using 'lang-header' for inline Flag + Name
   container.innerHTML = data.map(item => `
     <div class="card">
-      <div class="flag">${item.icon}</div>
-      <h3>${item.lang}</h3>
+      <div class="lang-header">
+        <span class="flag">${item.icon}</span>
+        <h3>${item.lang}</h3>
+      </div>
       <div class="level">${item.level}</div>
       <p>${item.details}</p>
     </div>
