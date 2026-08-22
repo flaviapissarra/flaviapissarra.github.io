@@ -8,23 +8,16 @@ const views = document.querySelectorAll('.view');
 
 navBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    // Remove active class from all buttons and views
     navBtns.forEach(b => b.classList.remove('active'));
     views.forEach(v => v.classList.remove('active'));
-
-    // Add active class to clicked button
     btn.classList.add('active');
-
-    // Show corresponding view
     const targetId = btn.dataset.target;
     document.getElementById(targetId).classList.add('active');
-    
-    // Reset scroll of viewport to top
     document.querySelector('.content-viewport').scrollTop = 0;
   });
 });
 
-// 2. DATA LOADER (Same as before, but adapted for new IDs)
+// 2. DATA LOADER
 async function fetchData(filename) {
   try {
     const response = await fetch(`data/${filename}.json`);
@@ -105,11 +98,11 @@ async function loadLanguages() {
   const container = document.getElementById('languages-grid');
   if (!data || !container) return;
   container.innerHTML = data.map(item => `
-    <div class="card" style="text-align:center;">
-      <div style="font-size:2rem; margin-bottom:0.5rem;">${item.icon}</div>
+    <div class="card">
+      <div style="font-size:1.5rem; margin-bottom:0.2rem;">${item.icon}</div>
       <h3>${item.lang}</h3>
-      <p style="color:var(--accent-blue); font-weight:600;">${item.level}</p>
-      <p style="font-size:0.8rem;">${item.details}</p>
+      <div class="level">${item.level}</div>
+      <p>${item.details}</p>
     </div>
   `).join('');
 }
