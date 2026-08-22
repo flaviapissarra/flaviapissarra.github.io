@@ -32,6 +32,17 @@
       "link": "https://sedu.es.gov.br/centro-estadual-de-idiomas-cei"
     },
     {
+      "id": "nihongo",
+      "category": "language-edu",
+      "label": "Soyuz Institute & Private Teacher · Japanese Language & Literature",
+      "title": "Japanese Language & Literature",
+      "startYear": 2024,
+      "endYear": 2025,
+      "description": "JLPT-N5-based content.",
+      "institution": "The Japan Foundation's Irodori A1 and A2-1 and Minna no Nihongo I",
+      "link": "https://institutosoyuz.ru/"
+    },
+    {
       "id": "ctst",
       "category": "language-edu",
       "label": "Circolo Trentino di Santa Teresa · Italian Language & Literature",
@@ -41,7 +52,12 @@
       "description": "A1 proficiency.",
       "institution": "Circolo Trentino di Santa Teresa",
       "link": "https://circolotrentinost.com.br/"     
-    },    
+    },
+    {
+      "id":
+      "title": "120 Hour TESOL/TEFL Certificate",
+      
+    },
     {
       "id": "duo",
       "category": "language-edu",
