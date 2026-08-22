@@ -45,13 +45,13 @@
     {
       "id": "duo",
       "category": "language-edu",
-      "label": "Duolingo · Korean Language",
+      "label": "Duolingo and Sejong Institute · Korean Language",
       "title": "Korean Language",
       "startYear": 2026,
       "endYear": 2028,
       "description": "Studying for TOPIK I 1. Elementary proficiency.",
-      "institution": "Duolingo",
-      "link": "https://www.duolingo.com"
+      "institution": "Duolingo and Sejong Institute",
+      "link": "https://www.iksi.or.kr/lms/main/main.do"
     },
     {
       "id": "ifes-ti",
