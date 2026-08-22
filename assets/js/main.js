@@ -2,47 +2,63 @@
    FLAVIAPP · SPA LOGIC & DATA RENDERER
    ========================================= */
 
-// Utility: Clean trailing spaces from JSON keys & values
+// 1. UTILITY: Clean trailing spaces from JSON keys & values
+// This fixes the issue where your JSON has keys like "lang " instead of "lang"
 function cleanData(obj) {
   if (Array.isArray(obj)) return obj.map(cleanData);
   if (obj && typeof obj === 'object') {
     const cleaned = {};
     for (const key in obj) {
+      // Trim keys and recursively clean values
       cleaned[key.trim()] = cleanData(obj[key]);
     }
     return cleaned;
   }
+  // Trim string values
   return typeof obj === 'string' ? obj.trim() : obj;
 }
 
-// 1. NAVIGATION LOGIC
+// 2. NAVIGATION LOGIC
 const navBtns = document.querySelectorAll('.nav-btn');
 const views = document.querySelectorAll('.view');
 
 navBtns.forEach(btn => {
   btn.addEventListener('click', () => {
+    // Remove active class from all buttons and views
     navBtns.forEach(b => b.classList.remove('active'));
     views.forEach(v => v.classList.remove('active'));
+    
+    // Add active class to clicked button
     btn.classList.add('active');
-    document.getElementById(btn.dataset.target).classList.add('active');
-    document.querySelector('.content-viewport').scrollTop = 0;
+    
+    // Show corresponding view
+    const targetId = btn.dataset.target;
+    const targetView = document.getElementById(targetId);
+    
+    if (targetView) {
+      targetView.classList.add('active');
+      // Reset scroll to top of content area
+      document.querySelector('.content-viewport').scrollTop = 0;
+    } else {
+      console.error(`View with ID "${targetId}" not found.`);
+    }
   });
 });
 
-// 2. DATA FETCHER
+// 3. DATA FETCHER
 async function fetchData(filename) {
   try {
     const response = await fetch(`data/${filename}.json`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const raw = await response.json();
-    return cleanData(raw);
+    return cleanData(raw); // Clean data before returning
   } catch (error) {
     console.error(`Failed to load ${filename}:`, error);
     return null;
   }
 }
 
-// 3. RENDER FUNCTIONS
+// 4. RENDER FUNCTIONS
 
 // --- EXPERIENCE / TIMELINE ---
 async function renderExperience() {
@@ -65,11 +81,11 @@ async function renderExperience() {
   if (listContainer && data.rows) {
     listContainer.innerHTML = data.rows.map(row => {
       const cat = categories[row.category] || {};
-      const catColor = cat.color || '#94a3b8';
+      const catColor = cat.color || '#94a3b8'; // Fallback color
       
       return `
         <div class="timeline-item" data-category="${row.category}">
-          <!-- Inline Header: Date + Tag -->
+          <!-- Date matches Category Color -->
           <div class="t-header">
             <span class="t-year" style="color: ${catColor} !important;">${row.startYear} – ${row.endYear}</span>
             <span class="timeline-category-badge" style="color:${catColor}; border-color: ${catColor}40; background:${catColor}15;">
@@ -89,8 +105,11 @@ async function renderExperience() {
   if (filterContainer) {
     filterContainer.addEventListener('click', (e) => {
       if (!e.target.classList.contains('filter-btn')) return;
+      
+      // Update active state
       filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       e.target.classList.add('active');
+      
       const filter = e.target.dataset.filter;
       listContainer.querySelectorAll('.timeline-item').forEach(item => {
         item.style.display = (filter === 'all' || item.dataset.category === filter) ? 'block' : 'none';
@@ -109,7 +128,9 @@ async function renderProjects() {
     <div class="card">
       <h3>${item.title}</h3>
       <p>${item.description}</p>
-      <div class="card-tools">${item.tools.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="card-tools">
+        ${item.tools.map(t => `<span>${t}</span>`).join('')}
+      </div>
       <div style="margin-top:0.5rem; display:flex; gap:1rem;">
         ${item.public_link ? `<a href="${item.public_link}" class="card-link" target="_blank">View Project ↗</a>` : ''}
         ${item.request_access ? `<a href="${item.request_access}" class="card-link" target="_blank">Request Access </a>` : ''}
@@ -138,7 +159,12 @@ async function renderLinguistics() {
 async function renderLanguages() {
   const data = await fetchData('languages');
   const container = document.getElementById('languages-grid');
-  if (!data || !container) return;
+  
+  // Safety check: if data is empty or container missing
+  if (!data || !container) {
+    console.warn("Languages data or container not found.");
+    return;
+  }
   
   container.innerHTML = data.map(item => `
     <div class="card">
@@ -150,7 +176,7 @@ async function renderLanguages() {
   `).join('');
 }
 
-// 4. INITIALIZATION
+// 5. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
   renderExperience();
   renderProjects();
