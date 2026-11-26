@@ -13,3 +13,4 @@ User-agent: Amazonbot
 User-agent: Meta-ExternalAgent
 User-agent: PerplexityBot
 Disallow: /
+Disallow: /data/
