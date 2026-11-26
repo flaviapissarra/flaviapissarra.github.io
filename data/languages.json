@@ -50,22 +50,15 @@
   
   {
     "lang":"Python",
-    "level":"Elementary",
+    "level":"Elementary/Learning",
     "icon":"🐍",
     "details":" "
   },
   
   {
     "lang":"SQL",
-    "level":"Elementary",
+    "level":"Elementary/Learning",
     "icon":"🛢️",
-    "details":" "
-  },
-
-  {
-    "lang":"Bash",
-    "level":"Elementary",
-    "icon":"⚙️",
     "details":" "
   }
 ]
