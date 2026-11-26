@@ -2,62 +2,70 @@
   {
     "lang":"Portuguese",
     "level":"Expertise - CERF C2 - Native",
-    "icon":"🇧🇷"
+    "icon":"🇧🇷",
+    "details":" "
   },
   
   {
     "lang":"English",
     "level":"Expertise - CEFR C2 - Full fluency",
     "icon":"🇬🇧",
-    "details":"Technical, academic, and diplomatic writing, translation and interpretation."
+    "details":" "
   },
   
   {
     "lang":"Spanish",
     "level":"Expertise - CEFR C2 - Full fluency",
     "icon":"🇪🇸",
-    "details":"Technical, academic, and diplomatic writing, translation and interpretation."
+    "details":" "
   },
   
   {
     "lang":"Italian",
     "level":"Elementary, CEFR A2",
     "icon":"🇮🇹",
-    "details":"Export documentation, international trade terminology and Literature."
+    "details":" "
   },
   
   {
     "lang":"Japanese",
     "level":"Elementary, JLPT N5",
     "icon":"🇯🇵",
-    "details":"Hiragana, katakana, kanji. Intercultural communication and diplomacy focus."
+    "details":" "
   },
 
   {
     "lang":"Korean",
-    "level":"Elementary, TOPIK I-1",
+    "level":"Elementary/Learning, TOPIK I-1",
     "icon":"🇰🇷",
-    "details":"Hangeul. Intercultural communication and diplomacy focus."
+    "details":" "
+  },
+  
+  {
+    "lang":"Mandarin Chinese",
+    "level":"Elementary/Learning, TOPIK I-1",
+    "icon":"🇨🇳",
+    "details":" "
   },
   
   {
     "lang":"Python",
-    "level":"1",
+    "level":"Elementary",
     "icon":"🐍",
-    "details":"1"
+    "details":" "
   },
   
   {
     "lang":"SQL",
-    "level":"1",
+    "level":"Elementary",
     "icon":"🛢️",
-    "details":"1"
+    "details":" "
   },
 
   {
     "lang":"Bash",
-    "level":"1",
+    "level":"Elementary",
     "icon":"⚙️",
-    "details":"1"
+    "details":" "
   }
 ]
