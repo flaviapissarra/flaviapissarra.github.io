@@ -1,14 +1,5 @@
 [
   {
-    "id": "freight-dashboard",
-    "title": "Cross-Border Freight Cost Dashboard",
-    "tools": ["Power BI", "SQL", "Python"],
-    "domain": "logistics",
-    "description": "Mapped shipping variances across 12 major ports. Automated reporting reduced manual data cleaning by 65%.",
-    "public_link": "https://github.com/fppissarra/freight-demo",
-    "request_access": "https://forms.gle/your-access-form"
-  },
-  {
     "id": "trade-kpi-tracker",
     "title": "Import/Export KPI Tracker",
     "tools": ["Power BI", "Excel", "DAX"],
