@@ -1,38 +1,10 @@
 [
   {
-    "id": "linguistic-phishing-analyser",
-    "title": "Linguistic Phishing Analyser",
-    "tools": ["100% client-side", "no data collection", "CSP", "SRI", "DOMPurify"],
-    "domain": "cybersec",
-    "description": "Detecting social engineering through computational linguistics.",
-    "public_link": "https://flaviapissarra.github.io/linguistic-phishing-analyser"
-  },
-
-  {
     "id": "ctecl",
     "title": "CTecL: Technology Club for Linguists",
     "tools": ["Linguistics", "Computational Linguistics", "Natural Language Processing (NLP)", "Cross-Lingual NLP"],
     "domain": "ctecl",
     "description": "Welcome to the CTecL: Tech Lab for Linguists!",
-    "public_link": "https://github.com/flaviapissarra/ctecl/blob/main/index.html"
-  },
-  
-  {
-    "id": "trade-kpi-tracker",
-    "title": "Import/Export KPI Tracker",
-    "tools": ["Power BI", "Excel", "DAX"],
-    "domain": "trade",
-    "description": "Real-time monitoring of clearance times, tariff impacts, and compliance flags for SME logistics clients.",
-    "public_link": "https://github.com/fppissarra/trade-kpi",
-    "request_access": "https://forms.gle/your-access-form"
-  },
-  {
-    "id": "edu-engagement-analysis",
-    "title": "Language Learning Engagement Analysis",
-    "tools": ["Python", "Pandas", "Matplotlib"],
-    "domain": "education",
-    "description": "Analyzed student progress metrics across 3 language programs to optimize curriculum pacing and resource allocation.",
-    "public_link": "https://github.com/fppissarra/edu-analysis",
-    "request_access": "https://forms.gle/your-access-form"
+    "public_link": "https://flaviapissarra.github.io/ctecl/index.html"
   }
 ]
