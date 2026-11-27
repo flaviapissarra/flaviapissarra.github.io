@@ -6,7 +6,17 @@
     "domain": "cybersec",
     "description": "Detecting social engineering through computational linguistics.",
     "public_link": "https://flaviapissarra.github.io/linguistic-phishing-analyser"
-  },  
+  },
+
+  {
+    "id": "ctecl",
+    "title": "CTecL: Technology Club for Linguists",
+    "tools": ["Linguistics", "Computational Linguistics", "Natural Language Processing (NLP)", "Cross-Lingual NLP"],
+    "domain": "ctecl",
+    "description": "Welcome to the CTecL: Tech Lab for Linguists!",
+    "public_link": "https://flaviapissarra.github.io/ctecl"
+  },
+  
   {
     "id": "trade-kpi-tracker",
     "title": "Import/Export KPI Tracker",
