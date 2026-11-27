@@ -1,5 +1,13 @@
 [
   {
+    "id": "linguistic-phishing-analyser",
+    "title": "Linguistic Phishing Analyser",
+    "tools": ["100% client-side", "no data collection", "CSP", "SRI", "DOMPurify"],
+    "domain": "cybersec",
+    "description": "Detecting social engineering through computational linguistics.",
+    "public_link": "https://flaviapissarra.github.io/linguistic-phishing-analyser"
+  },  
+  {
     "id": "trade-kpi-tracker",
     "title": "Import/Export KPI Tracker",
     "tools": ["Power BI", "Excel", "DAX"],
